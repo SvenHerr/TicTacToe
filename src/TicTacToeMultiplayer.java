@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class TicTacToeMultiplayer 
+public class TicTacToeMultiplayer implements TicTacToInterface
 {
 	static String[][] arr = new String[3][3];
 	final static String gewonnenMeldugSpieler1 = "Spieler 1 hat Gewonnen";
