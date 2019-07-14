@@ -1,14 +1,21 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe 
 {
 	static String[][] arr = new String[3][3];
 	final static String gewonnenMeldug = "Gewonnen";
+	final static String keinUndoMoeglich = "kein undo mehr möglich";
+	final static String anfangsMeldung = "Bitte geben Sie eine Zahl von 0 bis 2 ein oder 'u' für undo";
+	final static String hinweis = "Bitte nur Zahlen von 0 bis 2 eingeben oder 'u' für undo";
+	final static int noValue = -1;
+	static int reihe = noValue;
+	static int spalte = noValue;
+	static String xx = "";
 	
 	public static void main(String[]args) 
 	{
-		int reihe = 0;
-		int spalte = 0;
+		System.out.println(anfangsMeldung);
 		createField();
 		printArray();
 		
@@ -21,12 +28,31 @@ public class TicTacToe
 				reihe = scan.nextInt();
 				spalte = scan.nextInt();
 				
-				set(reihe,spalte);
+				set(reihe,spalte,"x");
 			}
-			catch(Exception e) 
+			catch(InputMismatchException ie) 
 			{
+				xx = scan.nextLine();
 				i--;
-				System.out.println("Bitte nur Zahlen von 0 bis 2 eingeben");
+				
+				if(reihe == -1 || spalte == -1) 
+				{
+					System.out.println(keinUndoMoeglich);
+				}
+				else 
+				{
+					if(xx.equals("u")) 
+					{
+						//undo();
+						set(reihe,spalte,"o");
+					}
+					else 
+					{
+						System.out.println(hinweis);
+					}
+					reihe = noValue;
+					spalte = noValue;
+				}
 			}
 			printArray();
 		}
@@ -34,13 +60,14 @@ public class TicTacToe
 		
 		checkIfPlayerWinns();
 	}
-	
-	public static void checkIfPlayerWinnsDiagonal() 
+	/*
+	public static void undo() 
 	{
-		if(arr[0][0] == "x" && arr[1][1] == "x" && arr[2][2] == "x") 
-		{
-			System.out.println(gewonnenMeldug);
-		}
+		arr[reihe][spalte] = "o";
+	}*/
+	public static void set(int reihe, int spalte, String value) 
+	{
+		arr[reihe][spalte] = value;
 	}
 	
 	public static void checkIfPlayerWinns() 
@@ -80,11 +107,6 @@ public class TicTacToe
 		}
 	}
 	
-	public static void set(int reihe, int zeile) 
-	{
-		arr[reihe][zeile] = "x";
-	}
-	
 	public static void printArray() 
 	{
 		for(int i = 0; i < arr.length; i++) 
@@ -102,6 +124,7 @@ public class TicTacToe
 				System.out.println("\n" + "-----");
 			}	
 		}	
+		System.out.println();
 	}
 	
 	public static void createField() 
