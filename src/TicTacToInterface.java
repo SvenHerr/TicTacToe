@@ -17,4 +17,6 @@ public interface TicTacToInterface
 	
 	public static void createField() {}
 	
+	public static void startProgramm() {}
+	
 }

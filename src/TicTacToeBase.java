@@ -65,7 +65,6 @@ public class TicTacToeBase implements TicTacToInterface
 		{
 			arr[reihe][spalte] = value;
 		}
-		
 	}
 	
 	public static boolean checkIfPlayerWinns() 

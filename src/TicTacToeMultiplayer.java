@@ -10,8 +10,10 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 	static String eingabeValue = "";
 	final static int maxMoves = 9;
 	
-	public static void main(String[]args) 
+	public static void startProgramm() 
 	{
+	//public static void main(String[]args) 
+	//{
 		System.out.println(anfangsMeldung);
 		createErklärung();
 		printArray();
@@ -61,7 +63,8 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 					if(fieldNr == -1) 
 					{
 						System.out.println(keinUndoMoeglich);
-					}else 
+					}
+					else 
 					{
 						try
 						{

@@ -3,8 +3,10 @@ import java.util.Scanner;
 
 public class TicTacToeSinglePlayer extends TicTacToeBase implements TicTacToInterface
 {
-	public static void main(String[]args) 
-	{
+	public static void startProgramm() 
+	{	
+	//public static void main(String[]args) 
+	//{
 		System.out.println(anfangsMeldung);
 		createErklärung();
 		printArray();
