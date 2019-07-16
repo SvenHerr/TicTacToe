@@ -95,96 +95,63 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 	
 	public static boolean checkIfPlayerWinns() 
 	{
-		// Diagonal
-		int countPlayer1 = 0;
-		int countPlayer2 = 0;
-		for(int i = 0; i < arr.length; i++) 
-		{
-			if(arr[i][i] == fieldPlayer1) 
-			{
-				countPlayer1++;
-			}
-			if(arr[i][i] == fieldPlayer2) 
-			{
-				countPlayer2++;
-			}
-			
-			
-			if(countPlayer1 == 3) 
-			{
-				System.out.println(gewonnenMeldugSpieler1);
-				return true;
-			}
-			if(countPlayer2 == 3) 
-			{
-				System.out.println(gewonnenMeldugSpieler2);
-				return true;
-			}
-		}
-		
-		// Zeile
-		countPlayer1 = 0;
-		countPlayer2 = 0;
+		int countPlayer1D = 0;
+		int countPlayer2D = 0;
+		int countPlayer1Z = 0;
+		int countPlayer2Z = 0;
+		int countPlayer1S = 0;
+		int countPlayer2S = 0;
 		for(int i = 0; i < arr.length; i++) 
 		{
 			for(int k = 0; k < arr.length; k++) 
 			{
+				if(arr[k][k] == fieldPlayer1) 
+				{
+					countPlayer1D++;
+				}
+				if(arr[k][k] == fieldPlayer2) 
+				{
+					countPlayer2D++;
+				}
+				
 				if(arr[i][k] == fieldPlayer1) 
 				{
-					countPlayer1++;
-					
+					countPlayer1Z++;
 				}
 				if(arr[i][k] == fieldPlayer2) 
 				{
-					countPlayer2++;
+					countPlayer2Z++;
 				}
 				
-				
-				if(countPlayer1 == 3) 
-				{
-					System.out.println(gewonnenMeldugSpieler1);
-					return true;
-				}
-				if(countPlayer2 == 3) 
-				{
-					System.out.println(gewonnenMeldugSpieler2);
-					return true;
-				}
-			}
-			countPlayer1 = 0;
-			countPlayer2 = 0;
-		}
-		
-		// Spalte
-		countPlayer1 = 0;
-		countPlayer2 = 0;
-		for(int i = 0; i < arr.length; i++) 
-		{
-			for(int k = 0; k < arr.length; k++) 
-			{
 				if(arr[k][i] == fieldPlayer1) 
 				{
-					countPlayer1++;
+					countPlayer1S++;
 				}
 				if(arr[k][i] == fieldPlayer2) 
 				{
-					countPlayer2++;
+					countPlayer2S++;
 				}
 				
-				if(countPlayer1 == 3) 
+				
+				if(countPlayer1Z == 3 || countPlayer1S == 3 || countPlayer1D == 3) 
 				{
 					System.out.println(gewonnenMeldugSpieler1);
 					return true;
 				}
-				if(countPlayer2 == 3) 
+				if(countPlayer2Z == 3 || countPlayer2S == 3 || countPlayer2D == 3) 
 				{
 					System.out.println(gewonnenMeldugSpieler2);
 					return true;
 				}
 			}
-			countPlayer1 = 0;
-			countPlayer2 = 0;
+			countPlayer1Z = 0;
+			countPlayer2Z = 0;
+			countPlayer1S = 0;
+			countPlayer2S = 0;
+			countPlayer1D = 0;
+			countPlayer2D = 0;
 		}
+
 		return false;
 	}
 }

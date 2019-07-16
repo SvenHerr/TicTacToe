@@ -19,4 +19,6 @@ public interface TicTacToInterface
 	
 	public static void startProgramm() {}
 	
+	public static void undo() {}
+	
 }

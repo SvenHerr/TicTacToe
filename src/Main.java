@@ -19,10 +19,12 @@ public class Main
 			if(inputStr.equals("1")) 
 			{
 				startMultiplayer() ;
+				break;
 			}
 			else if(inputStr.equals("2")) 
 			{
 				startSingleplayer();
+				break;
 			}
 			else if(count < anzahlAnVersuchen)
 			{
