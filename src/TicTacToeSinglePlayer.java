@@ -5,8 +5,6 @@ public class TicTacToeSinglePlayer extends TicTacToeBase implements TicTacToInte
 {
 	public static void startProgramm() 
 	{	
-	//public static void main(String[]args) 
-	//{
 		System.out.println(anfangsMeldung);
 		createErklärung();
 		printArray();

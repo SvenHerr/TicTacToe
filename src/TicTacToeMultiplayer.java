@@ -5,15 +5,13 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 {
 	final static String fieldPlayer1 = "x";
 	final static String fieldPlayer2 = "y";
-	final static String gewonnenMeldugSpieler1 = "Spieler 1 hat Gewonnen";
-	final static String gewonnenMeldugSpieler2 = "Spieler 2 hat Gewonnen";
 	static String eingabeValue = "";
 	final static int maxMoves = 9;
+	static String value = "";
+	static int spielernummer = 0;
 	
 	public static void startProgramm() 
 	{
-	//public static void main(String[]args) 
-	//{
 		System.out.println(anfangsMeldung);
 		createErklärung();
 		printArray();
@@ -22,22 +20,49 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 		
 		for(int i = 0; i < maxMoves; i++) 
 		{
-			int spielernummer = 0;
 			if(i % 2 == 0) 
 			{
 				spielernummer = 1;
+				System.out.println(spielerAufforderung1);
 			}
 			else 
 			{
 				spielernummer = 2;
+				System.out.println(spielerAufforderung2);
 			}
-			System.out.println("Spieler "+spielernummer+" bitte Zahl eingeben");
+			//System.out.println("Spieler "+spielernummer+" bitte Zahl eingeben");
 			
 			try 
 			{
-				fieldNr = scan.nextInt();
+				fieldNr = scan.nextLine();
 				
-				String value = "";
+				if(fieldNr.equals(undoSign)) 
+				{
+					if(valueInt == noValue) 
+					{
+						System.out.println(keinUndoMoeglich);
+					}
+					else 
+					{
+						undoPossible = true;
+						undo();
+						i--;
+					}	
+					i--;
+				}
+				else 
+				{
+					try 
+					{
+						valueInt = Integer.parseInt(fieldNr);
+					}
+					catch(NumberFormatException ne) 
+					{
+						System.out.println(hinweis);
+						i--;
+					}
+				}
+				
 				if(spielernummer ==1) 
 				{
 					value = fieldPlayer1;
@@ -46,7 +71,8 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 				{
 					value = fieldPlayer2;
 				}
-				input(fieldNr, value);	
+				input(valueInt, value);	
+				undoPossible = true;
 			}
 			catch(FeldIstSchonBelegtException e) 
 			{
@@ -55,33 +81,7 @@ public class TicTacToeMultiplayer extends TicTacToeBase implements TicTacToInter
 			}
 			catch(InputMismatchException ie) 
 			{
-				eingabeValue = scan.nextLine();
-				i--;
 				
-				if(eingabeValue.equals(undoSign)) 
-				{
-					if(fieldNr == -1) 
-					{
-						System.out.println(keinUndoMoeglich);
-					}
-					else 
-					{
-						try
-						{
-							input(fieldNr, available);
-						}
-						catch(Exception e1) 
-						{
-							e1.printStackTrace();
-						}
-						i--;
-						fieldNr = noValue;
-					}		
-				}
-				else 
-				{
-					System.out.println(hinweis);
-				}
 			}
 			printArray();
 			

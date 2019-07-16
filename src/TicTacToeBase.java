@@ -1,23 +1,25 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class TicTacToeBase implements TicTacToInterface
+public class TicTacToeBase extends Meldungen implements TicTacToInterface
 {
 	static String[][] arr = new String[3][3];
-	final static String gewonnenMeldug = "Gewonnen";
-	final static String keinUndoMoeglich = "kein undo mehr möglich";
-	final static String anfangsMeldung = "Bitte geben Sie eine Zahl von 1 bis 9 ein oder 'u' für undo";
-	final static String hinweis = "Bitte nur Zahlen von 0 bis 2 eingeben oder 'u' für undo";
 	final static int noValue = -1;
 	final static String unAvailable = "x";
 	final static String available = "o";
 	final static int maxMoves = 3;
 	final static String undoSign = "u";
-	static int fieldNr = noValue;
+	static String fieldNr = null;
+	static int valueInt = noValue; 
 	static String xx = "";
 	static Scanner scan = new Scanner(System.in);
+	Language language;
+	static boolean undoPossible;
 	
-	
+	public static void setLanguage() 
+	{
+		// Schaut sich die eingestellte Sprache vom PC an und setzt sie dementsprechend
+	}
 	public static void createErklärung() 
 	{
 		int count = 1;
@@ -56,12 +58,36 @@ public class TicTacToeBase implements TicTacToInterface
 			default: throw new InputMismatchException();
 		}
 	}
+	public static void undo() 
+	{
+		try 
+		{
+			input(valueInt, available);
+		} 
+		catch (InputMismatchException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (FeldIstSchonBelegtException e) 
+		{
+			e.printStackTrace();
+		}
+		valueInt = noValue;
+		undoPossible = false;
+	}
+	
 	public static void set(int reihe, int spalte, String value) throws FeldIstSchonBelegtException
 	{
-		if(arr[reihe][spalte] != available) 
+		if(arr[reihe][spalte] != available && !undoPossible) 
 		{
 			System.out.println("Feld ist schon belegt!");
-		}else 
+			return;
+		}
+		else if(undoPossible)
+		{
+			arr[reihe][spalte] = value;
+		}
+		else 
 		{
 			arr[reihe][spalte] = value;
 		}
